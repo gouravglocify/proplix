@@ -42,12 +42,16 @@ class CheckExpireOrder extends Command
     public function handle()
     {
       $order = Order::whereDate('expired_at', '=', \Carbon\Carbon::now()->toDateString())->first();
+      if(!empty($order))
+      {
       $user = DB::table('orders')
              ->join('users' , 'orders.user_id' , '=' , 'users.id')
              ->select('orders.type' , 'users.email')
              ->get();
 
-      if(isset($order) && ($order!='null'))
+      dd($user);
+
+      if(!empty($order) && !empty($user))
       {
         foreach ($user as $a)
         Mail::raw("Your plan is Expired soon , Visit on our Site , Update it!", function($message) use ($a)

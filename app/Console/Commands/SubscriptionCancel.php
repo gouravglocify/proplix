@@ -63,7 +63,7 @@ class SubscriptionCancel extends Command
                         ];
                     UserSubscription::where('id',$getSubscriptionDetails->id)->update($details);
                 }
-                       
+
             }
         }
     }
