@@ -1,0 +1,166 @@
+.profit-status .all-status .one, .suicide{    background: #CC0101; color: #fff; padding: 0px 4px;opacity: 0.25;}
+.profit-status .all-status .two, .noBg{ background: #C9DAF8; color: #000; padding: 0px 4px; opacity: 0.25;}
+.profit-status .all-status .three, .profiQty{  background: #D5A6BD;color: #fff; padding: 0px 4px; opacity: 0.25;}
+.profit-status .all-status .four, .profiTab{ background: #FFD966;color: #fff;padding: 0px 4px;opacity: 0.25;}
+.profit-status .all-status .five, .goodTab{ background: #8E7CC3; color: #fff;padding: 0px 4px;opacity: 0.25;}
+.profit-status .all-status .six, .excellentTab{ background: #61CF30; color: #fff; padding: 0px 4px; opacity: 0.25;}
+.profit-status .all-status .seven, .WorldTab{ background: #FF00FF;color: #fff;padding: 0px 4px;  opacity: 0.25;}
+.tabel_ft_size table.table {font-size: 14.1px;}
+.top_box .active, .allStatus .__top_box.activeDiv {opacity: unset !important; box-shadow: 0px 1px 4px rgba(0,0,0,.3); transform: scale(1.1);
+transition-duration: .35s; position: relative; z-index: 1000;}
+div#DataTables_Table_0_wrapper {width: 100%;}
+.card-header {background-color: #b9518f;color:#fff;}
+.purchase,.purchase:hover,.purchase:active {color: #fff !important;background-color: #6d5984 !important;border: 2px solid #6d5984 !important;}
+
+.top_box{margin-bottom: 30px; display: flex; flex-direction: row; flex-wrap: wrap;align-items: center;}
+.__top_box span {font-weight: bold;line-height: 12px; display: block; text-align: center;font-size: 10px;}
+.__top_box {padding: 5px !important; display: flex;align-items: center; justify-content: center;}
+.form-div input {border: 1px solid #e3e3e3;height: 30px;width: 100%;padding-left: 10px;}
+.active span {font-size: 14px; line-height: 18px;}
+.table th, .table td {padding: 5px;}
+.alert.alert-success {padding: 5px 10px;}
+
+.profile,.profile:hover{color:#fff;}
+.coupon{text-align: left;}
+
+.ShowButton {display: none;}
+.LeftSideBar {display: block;}
+.totalExpensesTab {height: 100%;max-height: 100%;}
+.saleValueTable {height: 100%;max-height: 38.5%;}
+.calculator{margin-bottom: 1em;}
+.questionTab tr td {width: 50%;}
+/*.__top_box.active, .col.active {position: absolute;right: 10%;width: 100%;max-width: 156px;bottom: 22%;}*/
+.saleValueTable tr td:nth-child(2) {width: 30%;}
+
+.allStatus .__top_box span {font-size: 21px;line-height: 24px;}
+.allStatus .__top_box {
+    min-height: 178px;
+    vertical-align: middle;
+    padding: 65px 0 !important;
+}
+.subsciptionPlan {
+    width: 100%;margin: 90px 0 0!important;
+}
+.subsciptionPlan .planTitle h1 {
+    color: #fff;
+    font-weight: 700;
+    padding-bottom: 20px;
+    text-align: center;
+}
+.subsciptionPlan .card {
+    min-height: 350px;
+}
+.subsciptionPlan .card h1.card-title {
+    font-weight: 700;
+}
+.subsciptionPlan .card-header {
+    background: linear-gradient(to left, rgba(0, 168, 255, .8) 0%, rgba(185, 0, 255, .8) 100%) !important;
+}
+.subsciptionPlan .buyPlanBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 160px;
+    height: 50px;
+    background-color: #bd59d4 !important;
+    border-color: #bd59d4 !important;
+    border-radius: 25px;
+    outline: none !important;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition: all 0.4s;
+    box-shadow: 0 10px 30px 0px rgba(189, 89, 212, 0.5);
+    -moz-box-shadow: 0 10px 30px 0px rgba(189, 89, 212, 0.5);
+    -webkit-box-shadow: 0 10px 30px 0px rgba(189, 89, 212, 0.5);
+    -o-box-shadow: 0 10px 30px 0px rgba(189, 89, 212, 0.5);
+    -ms-box-shadow: 0 10px 30px 0px rgba(189, 89, 212, 0.5);
+    margin: 0 auto;
+}
+.subsciptionPlan .planList {
+    min-height: 110px;
+}
+/** Footer **/
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 6em;
+}
+.footerList ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.footerList ul li {
+    display: inline-block;
+}
+
+.footerList ul li a, .copyRight span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #212529;
+    line-height: 1.5;
+    text-decoration: unset;
+}
+.proPlixContent {
+    background: #fff;
+    border-radius: 10px;
+    padding: 3em;
+    margin-bottom: 30px;
+}
+
+
+
+
+/* Media Screen */
+@media only screen and (min-width: 768px) and (max-width: 1025px) {
+	
+.col {
+    flex-basis: auto;
+  margin-bottom: 10px;
+}
+}
+@media only screen and (min-width: 100px) and (max-width: 767px) {
+/* Side Bar Style */
+.ShowButton {display: block; cursor: pointer;}
+.LeftSideBar {display: none;}
+.FixeSideBar + .LeftSideBar {display: block; margin: 0 !important; width: 100%;}
+.ShowButton {font-size: 32px;margin-right: 10px;}
+
+#sidebar {min-height: auto;}
+.UserName {display: none;}
+.__LeftBar {display: flex;justify-content: space-between;align-items: center; flex-wrap: wrap; padding: 10px !important;}
+
+.AvatarHead {padding: 0;margin: 0;border: 0; text-align: left;}
+.AvatarHead img {width: 100%;max-width: 70px;height: auto;}
+#sidebar ul li:last-child a {border: 0;}
+/* Side Bar Style */
+.__top_box {width: 100%;max-width: 100%;flex-basis: unset;margin: 0 !important;}
+.col {
+    flex-basis: auto;
+  margin-bottom: 10px;
+}
+.profit-status .all-status .seven, .profit-status .all-status .six, .profit-status .all-status .five, .profit-status .all-status .four, .profit-status .all-status .three, .profit-status .all-status .two, .profit-status .all-status .one {
+    margin: 0 17px;
+}
+.form-div .card {
+    margin-bottom: 15px;
+}
+.footer {
+    display: block;
+    padding: 1em 1em;
+}
+.footerList ul li {
+    display: block;
+    line-height: 2.5;
+}
+.footerList ul li span {
+    display: none;
+}
+.proPlixContent {padding: 2em 1em;}
+}

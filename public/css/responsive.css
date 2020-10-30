@@ -1,0 +1,46 @@
+
+@media only screen and (min-width:768px) and (max-width:1024px) {
+.subsciptionPlan {
+    margin: 0 !important;
+}
+.main-navbar {padding: 3em 1.2em;}
+
+}
+@media only screen and (min-width:100px) and (max-width:767px) {
+.col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {width: 100%;flex: unset;
+    max-width: 100%;}
+
+/*** Page Css **/
+.main-navbar {
+	top: -30px !important;
+}
+.home_banner_area .banner_inner .banner_content {
+    margin-left: 0;
+}
+.home_banner_area .banner_inner .banner_content h2 {
+    font-size: 50px;
+}
+.d-flex {
+    display: block !important;
+}
+#sidebar {
+    min-width: 100%;
+    max-width: 100%;}
+.card.weather-card {
+    margin-bottom: 20px;}
+#content {
+    padding: 30px 20px !important;}
+.form-div input#reportTitle {
+    margin-bottom: 20px;}
+#DataTables_Table_0_filter, #DataTables_Table_0_length, #DataTables_Table_0_info, #DataTables_Table_0_paginate {
+    text-align: left;}
+.wrap-login100, .subsciptionPlan {margin: 70px 0 0;}
+.planContainer {padding: 0px;}
+.main-navbar {padding: 3em 1em;}
+}
+
+
+@media only screen and (min-width:100px) and (max-width:767px) {
+.login100-form-title.mb-5 {margin-bottom: 30px !important;padding-top: 40px;}
+.container-login100 {min-height: 100% !important; align-items:end !important;}
+}
