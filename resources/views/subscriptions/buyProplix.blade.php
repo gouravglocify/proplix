@@ -17,14 +17,14 @@
 		            <h4 class="my-0 font-weight-normal">Apply Promocode</h4>
 		          </div>
 	          <div class="card-body">
-            <form method="POST">
+            <form method="POST" name="promocode">
 	            	@csrf
 						  <div class="form-group">
 						    <input type="text" class="form-control" id="promocode" aria-describedby="emailHelp" placeholder="Enter promocode here" name="promocode">
 						  </div>
 						  <button type="submit"  id="promoform" class="btn btn-lg btn-block btn-primary purchase">Apply Promocode !</button>
 						</form>
-						<form method="POST" action ="/orders">
+						<form method="POST" action ="/orders" name="order">
 							@csrf
 							<input type="hidden" name="price" value={{$finalAmount}} id="price">
 							<input type="hidden" name="type" value={{$type}} id="type">
