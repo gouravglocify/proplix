@@ -56,7 +56,7 @@
                   <h4 class="my-0">Monthly</h4>
                 </div>
                 <div class="card-body">
-                  <h1 class="card-title pricing-card-title">₹100 <small class="text-muted">/ mo</small></h1>
+                  <h1 class="card-title pricing-card-title">₹5 <small class="text-muted">/ mo</small></h1>
                   <ul class="list-unstyled mt-3 mb-4 planList">
                     <li>Unlimited Calculation per Month</li>
                    </ul>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-              <input type ="hidden" name="price" value="100">
+              <input type ="hidden" name="price" value="5">
               <input type ="hidden" name="type" value="month">
             </form>
             </div>

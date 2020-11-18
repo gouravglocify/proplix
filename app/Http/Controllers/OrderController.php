@@ -12,6 +12,7 @@ use App\User;
 use App\Notifications\UserData;
 use App\Notifications\SignUpNotification;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Session;
 
 class OrderController extends Controller
@@ -45,8 +46,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+      $order_id = uniqid();
         if(isset($request->name) && ($request->email) && ($request->phone)){
-
           $request->validate([
              'name' => ['required', 'string', 'max:255'],
              'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -54,16 +55,29 @@ class OrderController extends Controller
              'password' =>  ['required', 'string', 'min:8', 'confirmed'],
              'password_confirmation' => ['required','min:8'],
            ]);
-           $data = [$request->name , $request->email ,$request->phone , $request->password];
-           Session::put('data', $data);
+           $user =  User::create([
+               'name' => $request->name,
+               'email' => $request->email,
+               'phone' => $request->phone,
+               'password' => Hash::make($request->password),
+               'order_id' => $order_id,
+               'login_status'=> '0',
+               'token' => Str::random(60),
+             ]);
+           $getUserId = $user->id;
+           $notifyUser = User::findOrFail($getUserId);
+          $user_order = User::where('id' , $getUserId)->first();
+          $user->notify(new UserData($notifyUser));
+          $user->notify(new SignUpNotification($notifyUser));
         }
-       $order_id = uniqid();
+
        $order =  new Order();
        $order->order_id = $order_id;
        $order->status = 'pending';
        $order->price = ($request->price) ? $request->price : '';
        $order->transaction_id = '';
        $order->type = isset($request->type) && ($request->type == 'month') ? 1 : 2 ;
+       $order->user_id = isset($user) && ($getUserId) ? $getUserId : Auth::id();
        $order->save();
 
        $data_for_request = $this->handlePaytmRequest( $order_id, $order->price );
@@ -425,49 +439,15 @@ class OrderController extends Controller
     }
 
     public function paytmCallback( Request $request ) {
-      print_r($request->session()->get('data'));
-      die;
-  		$order_id = $request['ORDERID'];
-      if( (!Auth::check()) && ('TXN_SUCCESS' === $request['STATUS']))  {
-        $user = $request->session()->get('data');
-        if($user)
-        {
-        $user =  User::create([
-            'name' => $user[0],
-            'email' => $user[1],
-            'phone' => $user[2],
-            'password' => $user[3],
-            'token' => sha1(time()),
-        ]);
-        }
-        $getUserId = $user->id;
-        $notifyUser = User::findOrFail($getUserId);
-        $user->notify(new UserData($notifyUser));
-        $user->notify(new SignUpNotification($notifyUser));
-
+      $order_id = $request->ORDERID;
       $transaction_id = $request['TXNID'];
-      $order = Order::where( 'order_id', $order_id )->first();
-      $order->user_id = $getUserId;
-      $order->status = 'complete';
-      $order->transaction_id = $transaction_id;
-      if($order->type == 1)
-      {
-          $order->expired_at = Carbon::now()->addDays(29)->toDateTimeString();
-      }
-      else{
-          $order->expired_at = Carbon::now()->addYear(1)->toDateTimeString();
-      }
-        $order->save();
-
-      return redirect()->route('plans');
-
-        }
-
-      elseif((Auth::check()) && ('TXN_SUCCESS' === $request['STATUS']))   {
-        $order = Order::where( 'order_id', $order_id )->first();
+      $order = Order::where('order_id', $order_id )->first();
+      $user = User::where('order_id', $order_id )->first();
+      if( ($user->login_status == null) && ('TXN_SUCCESS' === $request['STATUS']) ) {
+        $user->login_status = '1';
+        $user->save();
         $order->status = 'complete';
         $order->transaction_id = $transaction_id;
-        $order->user_id = Auth::id();
         if($order->type == 1)
         {
             $order->expired_at = Carbon::now()->addDays(29)->toDateTimeString();
@@ -475,14 +455,28 @@ class OrderController extends Controller
         else{
             $order->expired_at = Carbon::now()->addYear(1)->toDateTimeString();
         }
-        $order->save();
-        return view( 'paytm/order-complete', compact( 'order') );
+          $order->save();
+          return view('plans' , compact( 'order'));
+      }
+
+      elseif(($user->login_status == 1) && ('TXN_SUCCESS' === $request['STATUS']))
+      {
+        $order->status = 'complete';
+        $order->transaction_id = $transaction_id;
+        if($order->type == 1)
+        {
+            $order->expired_at = Carbon::now()->addDays(29)->toDateTimeString();
+        }
+        else{
+            $order->expired_at = Carbon::now()->addYear(1)->toDateTimeString();
+        }
+          $order->save();
+          return view('paytm/order-complete' , compact( 'order'));
       }
       else{
   			return view( 'paytm/payment-failed' );
   		}
 	}
-
 
 
 }

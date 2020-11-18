@@ -80,7 +80,7 @@
                 <span class="focus-input100"></span>
             </div>
             <input type ="hidden" name="type" value="month">
-            <input type ="hidden" name="price" value="100">
+            <input type ="hidden" name="price" value="5">
             <div class="container-login100-form-btn mb-4">
             <button class="login100-form-btn" type="submit"  id ="paybutton">
                 Pay
