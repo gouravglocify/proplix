@@ -33,15 +33,17 @@
 	            <ul class="list-unstyled mt-3 mb-4">
 	              <li>20 Calculation per Month</li>
 	            </ul>
-							@if(is_null($getUserSubscription) || (!is_null($getUserSubscription) && $getUserSubscription->status= '' ))
-							 <button type="button" class="btn btn-lg btn-block btn-outline-primary purchase">Active</button>
+	            @if(is_null($getUserSubscription) || (!is_null($getUserSubscription) && $getUserSubscription->status!='active' ))
+	            	<button type="button" class="btn btn-lg btn-block btn-outline-primary purchase">Active</button>
 
-						 <!-- @elseif($getUserSubscription->type=='')
-							 <button type="button" class="btn btn-lg btn-block btn-outline-primary purchase">Cancel Request Submitted</button> -->
+            	@elseif(!is_null($getUserSubscription) && !is_null($getUserSubscription->current_end))
+	            	<button type="button" class="btn btn-lg btn-block btn-outline-primary purchase">Cancel Request Submitted</button>
 
-						 @else
-							 <a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('cancelSubscription/'.base64_encode($getUserSubscription->user_id))}}">Downgrade/Cancel</a>
-						 @endif
+	            @else
+	            	<a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('cancelSubscription/'.base64_encode($getUserSubscription->id))}}">Downgrade/Cancel</a>
+	            @endif
+
+
 	          </div>
 	        </div>
 	        <div class="card mb-4 box-shadow">
@@ -53,16 +55,16 @@
 	            <ul class="list-unstyled mt-3 mb-4">
 	              <li>Unlimited Calculation per Month</li>
 	            </ul>
-							@if(is_null($getUserSubscription) || (($getUserSubscription->status == 'complete') && $getUserSubscription->type==1))
-								<a href="{{url('buyProplix/month')}}" class="btn btn-lg btn-block btn-primary purchase" id="rzp-button1">Buy Proplix</a>
+	            @if(is_null($getUserSubscription) || (!is_null($getUserSubscription) && $getUserSubscription->status!='active' && $getUserSubscription->status!='authenticated' ))
+	            	<a href="{{url('buyProplix/month')}}" class="btn btn-lg btn-block btn-primary purchase" id="rzp-button1">Buy Proplix</a>
 
-							@else
-								@if($getUserSubscription->type==1)
-								<button type="button" class="btn btn-lg btn-block btn-primary purchase">Active</button>
-								@else
-								<a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('cancelSubscription/'.base64_encode($getUserSubscription->user_id))}}">Downgrade/Cancel</a>
-								@endif
-							@endif
+	            @else
+	            	@if($getUserSubscription->plan_type==1)
+	            	<button type="button" class="btn btn-lg btn-block btn-primary purchase">Active</button>
+	            	@else
+	            	<a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('cancelSubscription/'.base64_encode($getUserSubscription->id))}}">Downgrade/Cancel</a>
+	            	@endif
+	            @endif
 	          </div>
 	        </div>
 	        <div class="card mb-4 box-shadow">
@@ -74,17 +76,16 @@
 	            <ul class="list-unstyled mt-3 mb-4">
 	              <li>Unlimited Calculation per Month</li>
 	            </ul>
-							@if(is_null($getUserSubscription) || (!is_null($getUserSubscription) && $getUserSubscription->status = 'complete' ))
-								<a href="{{url('buyProplix/year')}}" class="btn btn-lg btn-block btn-primary purchase" id="rzp-button1">Buy Proplix</a>
+	            @if(is_null($getUserSubscription) || (!is_null($getUserSubscription) && $getUserSubscription->status!='active' && $getUserSubscription->status!='authenticated' ))
+	            	<a href="{{url('buyProplix/year')}}" class="btn btn-lg btn-block btn-primary purchase" id="rzp-button1">Buy Proplix</a>
 
-							@else
-								@if($getUserSubscription->type==2)
-								<button type="button" class="btn btn-lg btn-block btn-primary purchase">Active</button>
-								@else
-								<a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('upgradeSubscription/'.base64_encode($getUserSubscription->user_id))}}">Upgrade</a>
-								@endif
-							@endif
-
+	            @else
+	            	@if($getUserSubscription->plan_type==2)
+	            	<button type="button" class="btn btn-lg btn-block btn-primary purchase">Active</button>
+	            	@else
+	            	<a  class="btn btn-lg btn-block btn-primary purchase" href="{{url('upgradeSubscription/'.base64_encode($getUserSubscription->id))}}">Upgrade</a>
+	            	@endif
+	            @endif
 	          </div>
 	        </div>
 	      </div>

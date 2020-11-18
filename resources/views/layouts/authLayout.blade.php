@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -29,7 +30,7 @@
                     <a href="{{url('')}}">
                         <img src="{{asset('images/logo1.png')}}" width="42" height="42">
                         <span class="logo-text ">
-                            {{ucwords(strtolower(env('APP_NAME')))}} 
+                            {{ucwords(strtolower(env('APP_NAME')))}}
                             <span class="small-tag">Beta v.0.1</span>
                         </span>
                     </a>

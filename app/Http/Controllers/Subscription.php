@@ -12,6 +12,7 @@ use App\Notifications\SubscriptionCancelNotification;
 use App\Notifications\SubscriptionRenewNotification;
 use App\Coupon;
 use App\User;
+use App\Order;
 use App\Traits\PaytmChecksum;
 use Illuminate\Support\Carbon;
 class Subscription extends Controller
@@ -20,12 +21,16 @@ class Subscription extends Controller
 
     public function packages(Request $request){
 			$userDetails = Auth::user();
-			$getUserSubscription = UserSubscription::where([
-	                                    ['user_id','=',$userDetails->id],
-	                                    ['status','=','active'],
-	                               ])->orderBy('id','DESC')->first();
+			// $getUserSubscription = UserSubscription::where([
+	    //                                 ['user_id','=',$userDetails->id],
+	    //                                 ['status','=','active'],
+	    //                            ])->orderBy('id','DESC')->first();
+			$getUserSubscription = Order::where('user_id','=',$userDetails->id)->first();
+			// echo "<pre>";
+			// print_r($getUserSubscription);
+			// die;
 	        $getCaluationshit = UserCalculation::where('user_id',$userDetails->id)->get();
-			return view('subscriptions.packages',compact('userDetails','getUserSubscription','getCaluationshit'));
+			return view('subscriptions.packages',compact('userDetails','getCaluationshit','getUserSubscription'));
     }
 
 	public function buyProplix(Request $request,$type){
@@ -75,12 +80,6 @@ class Subscription extends Controller
 				}
 		return view('subscriptions.buyProplix',compact('userDetails','getUserSubscription','getCaluationshit','finalAmount' , 'type') );
     }
-
-
-
-
-
-
 
     public function transaction(Request $request,$paymentId,$subscriptionId,$signature,$type){
     	$details  = array();
@@ -140,8 +139,6 @@ class Subscription extends Controller
 					}
 				}
 				else{
-
-
 					$details = [
 						'plan_type'=>$plan_type,
 						'user_id'=>$userDetails->id,

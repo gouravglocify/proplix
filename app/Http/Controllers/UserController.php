@@ -48,8 +48,8 @@ class UserController extends Controller
             if($userDetails->user_type=='2'){
                 return redirect(url('adminDashboard'));
             }
-            
-    		
+
+
     		Auth::login($userDetails);
     		return redirect(url('dashboard'));
     	}
@@ -67,7 +67,7 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:25'],
                 'phone' => ['required', 'string', 'max:10'],
                 'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-                'password' => ['required', 'string', 'min:8'],
+                'password' => ['required', 'string', 'min:8' , 'confirmed'],
             ]);
             $user =  User::create([
                 'name' => $request->input('name'),
@@ -125,7 +125,7 @@ class UserController extends Controller
                                                             'password'=>bcrypt($request->input('password')),
                                                             'phone'=>$request->input('phone'),
                                                         ]);
-                }   
+                }
                 else{
                     User::where('id',$userDetails->id)->update([
                                                             'name'=>$request->input('name'),
@@ -148,7 +148,7 @@ class UserController extends Controller
                                                             'password'=>bcrypt($request->input('password')),
                                                             'phone'=>$request->input('phone'),
                                                         ]);
-                }   
+                }
                 else{
                     User::where('id',$userDetails->id)->update([
                                                             'name'=>$request->input('name'),
@@ -211,7 +211,7 @@ class UserController extends Controller
             $updatedDetails =  User::where('id',$getUserDetails->id)->first();
             $getUserDetails->notify((new PasswordReset($updatedDetails)));
             return back()->with('success','Password reset link sent to your email '.strtoupper($request->input('email')).'.');
-           
+
         }
         return view('auth.passwords.email');
     }
@@ -240,7 +240,7 @@ class UserController extends Controller
             Auth::login($userDetails);
             return redirect(url('dashboard'));
         }
-        
+
         return view('auth.passwords.reset',compact('getDetails'));
 
     }
@@ -283,6 +283,10 @@ class UserController extends Controller
         }
         return view('contactUs',compact('userDetails'));
     }
+
+    public function AuthRouteAPI(Request $request){
+    return $request->user();
+ }
 
 
 }

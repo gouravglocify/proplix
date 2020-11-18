@@ -11,12 +11,14 @@
 |
 */
 
-Route::resource('/orders', 'OrderController');
-Route::post('/paytm-callback', 'OrderController@paytmCallback');
+
+	Route::resource('/orders', 'OrderController');
+	Route::post('/paytm-callback', 'OrderController@paytmCallback');
+	Route::get('/getbuy', 'OrderController@getBuy');
 
 
 Route::get('/','UserController@index');
-Route::get('plans','UserController@plans');
+Route::get('plans','UserController@plans')->name('plans');
 Route::get('privacyPolicy','UserController@privacyPolicy');
 Route::get('termsConditions','UserController@termsConditions');
 Route::get('refundPolicy','UserController@refundPolicy');
@@ -66,12 +68,6 @@ Route::middleware(['verified','user'])->group(function () {
 	Route::match(['get','post'],'support','UserController@support');
 
 });
-
-
-
-
-
-
 
 /*ADMIN SECTION*/
 Route::middleware(['admin'])->group(function () {

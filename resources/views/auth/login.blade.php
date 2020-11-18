@@ -23,10 +23,6 @@
                 <input class="input100 @error('password') is-invalid @enderror" type="password" name="password" required placeholder="Enter Password" autocomplete="current-password">
                 <span class="focus-input100"></span>
             </div>
-            
-            
-
-            
 
             <div class="container-login100-form-btn mb-4">
                 <button class="login100-form-btn" type="submit">
@@ -35,10 +31,10 @@
             </div>
             <a href="{{ url('forgotPassword') }}" class="pull-right need-help" style="color:#2755bf"> Forgot Password ? </a>
 
-            
+
         </form>
 
-        
+
     </div>
 </div>
 @endsection
